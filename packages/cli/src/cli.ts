@@ -73,7 +73,7 @@ export async function main() {
       process.exit(1)
     }
 
-    log('info', result!)
+    log('info', result)
   }
 }
 
