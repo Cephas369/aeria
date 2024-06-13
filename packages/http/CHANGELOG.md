@@ -1,5 +1,53 @@
 # @aeriajs/http
 
+## 0.0.73
+
+### Patch Changes
+
+- Updated dependencies [afbd76e]
+  - @aeriajs/common@0.0.63
+  - @aeriajs/entrypoint@0.0.65
+  - @aeriajs/validation@0.0.66
+
+## 0.0.72
+
+### Patch Changes
+
+- Updated dependencies [4c7243e]
+  - @aeriajs/entrypoint@0.0.64
+
+## 0.0.71
+
+### Patch Changes
+
+- Updated dependencies [ebe7477]
+  - @aeriajs/types@0.0.58
+  - @aeriajs/common@0.0.62
+  - @aeriajs/entrypoint@0.0.63
+  - @aeriajs/validation@0.0.65
+
+## 0.0.70
+
+### Patch Changes
+
+- Updated dependencies [6c981e6]
+- Updated dependencies [ec235f7]
+  - @aeriajs/common@0.0.61
+  - @aeriajs/types@0.0.57
+  - @aeriajs/entrypoint@0.0.62
+  - @aeriajs/validation@0.0.64
+
+## 0.0.69
+
+### Patch Changes
+
+- fafac8a: Introduce `Result`
+- Updated dependencies [fafac8a]
+  - @aeriajs/validation@0.0.63
+  - @aeriajs/common@0.0.60
+  - @aeriajs/types@0.0.56
+  - @aeriajs/entrypoint@0.0.61
+
 ## 0.0.68
 
 ### Patch Changes

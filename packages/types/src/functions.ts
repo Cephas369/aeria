@@ -1,5 +1,6 @@
 import type { FilterOperators, StrictFilter as Filter, StrictUpdateFilter, WithId, OptionalId, ObjectId } from 'mongodb'
-import type { EndpointError, StrictEndpointErrorContent } from './error.js'
+import type { Result } from './result.js'
+import type { StrictEndpointError } from './endpointError.js'
 import type { PackReferences } from './schema.js'
 import type { ACError } from './accessControl.js'
 import type { ValidationErrorCode } from './validation.js'
@@ -115,9 +116,8 @@ export type RemoveFilePayload = UploadAuxProps & {
 }
 
 export type InsertReturnType<TDocument> =
-  | TDocument
-  | EndpointError<
-    StrictEndpointErrorContent<
+  Result.Either<
+    StrictEndpointError<
       | ACError.InsecureOperator
       | ACError.OwnershipError
       | ACError.ResourceNotFound
@@ -126,39 +126,46 @@ export type InsertReturnType<TDocument> =
       unknown,
       | HTTPStatus.NotFound
       | HTTPStatus.UnprocessableContent
-    >
+    >,
+    TDocument
   >
 
 export type GetReturnType<TDocument> =
-  | TDocument
-  | EndpointError<
-    StrictEndpointErrorContent<
-      ACError.ResourceNotFound,
+  Result.Either<
+    StrictEndpointError<
+      | ACError.ResourceNotFound
+      | ACError.MalformedInput,
       unknown,
-      HTTPStatus.NotFound
-    >
+      | HTTPStatus.NotFound
+      | HTTPStatus.BadRequest
+    >,
+    TDocument
   >
 
+export type CountReturnType = Result.Either<unknown, number>
+export type GetAllReturnType<TDocument> = Result.Either<unknown, TDocument[]>
+export type RemoveReturnType<TDocument> = Result.Either<unknown, TDocument>
+
 export type CollectionFunctions<TDocument extends CollectionDocument<OptionalId<any>>> = {
-  count: (payload: CountPayload<TDocument>)=> Promise<number>
+  count: (payload: CountPayload<TDocument>)=> Promise<CountReturnType>
   get: (payload: GetPayload<TDocument>)=> Promise<GetReturnType<TDocument>>
-  getAll: (payload?: GetAllPayload<TDocument>)=> Promise<TDocument[]>
+  getAll: (payload?: GetAllPayload<TDocument>)=> Promise<GetAllReturnType<TDocument>>
   insert: (payload: InsertPayload<TDocument>)=> Promise<InsertReturnType<TDocument>>
-  remove: (payload: RemovePayload<TDocument>)=> Promise<TDocument>
+  remove: (payload: RemovePayload<TDocument>)=> Promise<RemoveReturnType<TDocument>>
   // @TODO
   removeAll: (payload: RemoveAllPayload)=> Promise<any>
   removeFile: (payload: RemoveFilePayload)=> Promise<any>
 }
 
 export type CollectionFunctionsSDK<TDocument extends CollectionDocument<OptionalId<any>>> = {
-  count: (payload: CountPayload<TDocument>)=> Promise<WithACErrors<number>>
+  count: (payload: CountPayload<TDocument>)=> Promise<WithACErrors<CountReturnType>>
   get: (payload: GetPayload<TDocument>)=> Promise<WithACErrors<GetReturnType<TDocument>>>
-  getAll: (payload?: GetAllPayload<TDocument>)=> Promise<WithACErrors<{
+  getAll: (payload?: GetAllPayload<TDocument>)=> Promise<WithACErrors<Result.Either<unknown, {
     data: TDocument[]
     pagination: Pagination
-  }>>
+  }>>>
   insert: (payload: InsertPayload<TDocument>)=> Promise<WithACErrors<InsertReturnType<TDocument>>>
-  remove: (payload: RemovePayload<TDocument>)=> Promise<WithACErrors<TDocument>>
+  remove: (payload: RemovePayload<TDocument>)=> Promise<WithACErrors<RemoveReturnType<TDocument>>>
   // @TODO
   removeAll: (payload: RemoveAllPayload)=> Promise<any>
   removeFile: (payload: RemoveFilePayload)=> Promise<any>

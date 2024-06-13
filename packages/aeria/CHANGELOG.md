@@ -1,5 +1,110 @@
 # aeria
 
+## 0.0.110
+
+### Patch Changes
+
+- Updated dependencies [afbd76e]
+  - @aeriajs/common@0.0.63
+  - @aeriajs/builtins@0.0.102
+  - @aeriajs/cli@0.0.41
+  - @aeriajs/core@0.0.102
+  - @aeriajs/entrypoint@0.0.65
+  - @aeriajs/http@0.0.73
+  - @aeriajs/security@0.0.102
+  - @aeriajs/server@0.0.104
+  - @aeriajs/validation@0.0.66
+  - @aeriajs/node-http@0.0.73
+
+## 0.0.109
+
+### Patch Changes
+
+- 535b932: Return `Result` from builtin functions
+- Updated dependencies [535b932]
+  - @aeriajs/builtins@0.0.101
+  - @aeriajs/cli@0.0.40
+  - @aeriajs/core@0.0.101
+  - @aeriajs/server@0.0.103
+  - @aeriajs/security@0.0.101
+
+## 0.0.108
+
+### Patch Changes
+
+- Updated dependencies [5e6751d]
+  - @aeriajs/builtins@0.0.100
+  - @aeriajs/server@0.0.102
+  - @aeriajs/cli@0.0.39
+  - @aeriajs/core@0.0.100
+  - @aeriajs/security@0.0.100
+
+## 0.0.107
+
+### Patch Changes
+
+- Updated dependencies [4c7243e]
+  - @aeriajs/entrypoint@0.0.64
+  - @aeriajs/server@0.0.101
+  - @aeriajs/builtins@0.0.99
+  - @aeriajs/cli@0.0.38
+  - @aeriajs/core@0.0.99
+  - @aeriajs/http@0.0.72
+  - @aeriajs/security@0.0.99
+  - @aeriajs/node-http@0.0.72
+
+## 0.0.106
+
+### Patch Changes
+
+- Updated dependencies [ebe7477]
+  - @aeriajs/types@0.0.58
+  - @aeriajs/builtins@0.0.98
+  - @aeriajs/cli@0.0.37
+  - @aeriajs/common@0.0.62
+  - @aeriajs/core@0.0.98
+  - @aeriajs/entrypoint@0.0.63
+  - @aeriajs/http@0.0.71
+  - @aeriajs/security@0.0.98
+  - @aeriajs/server@0.0.100
+  - @aeriajs/validation@0.0.65
+  - @aeriajs/node-http@0.0.71
+
+## 0.0.105
+
+### Patch Changes
+
+- Updated dependencies [6c981e6]
+- Updated dependencies [ec235f7]
+  - @aeriajs/common@0.0.61
+  - @aeriajs/server@0.0.99
+  - @aeriajs/types@0.0.57
+  - @aeriajs/builtins@0.0.97
+  - @aeriajs/cli@0.0.36
+  - @aeriajs/core@0.0.97
+  - @aeriajs/entrypoint@0.0.62
+  - @aeriajs/http@0.0.70
+  - @aeriajs/security@0.0.97
+  - @aeriajs/validation@0.0.64
+  - @aeriajs/node-http@0.0.70
+
+## 0.0.104
+
+### Patch Changes
+
+- Updated dependencies [fafac8a]
+  - @aeriajs/validation@0.0.63
+  - @aeriajs/node-http@0.0.69
+  - @aeriajs/builtins@0.0.96
+  - @aeriajs/security@0.0.96
+  - @aeriajs/common@0.0.60
+  - @aeriajs/server@0.0.98
+  - @aeriajs/types@0.0.56
+  - @aeriajs/core@0.0.96
+  - @aeriajs/http@0.0.69
+  - @aeriajs/cli@0.0.35
+  - @aeriajs/entrypoint@0.0.61
+
 ## 0.0.103
 
 ### Patch Changes

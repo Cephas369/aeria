@@ -1,12 +1,12 @@
-import { init, createRouter, isError, unwrapError, insertErrorSchema, ACError } from 'aeria'
+import { init, createRouter, resultSchema, insertErrorSchema, ACError, Result } from 'aeria'
 export * as collections from './collections/index.js'
 
 const router = createRouter()
 
-router.GET('/hello-world', () => {
-  return {
-    message: 'Hello, world',
-  }
+router.GET('/hello-world', (context) => {
+  return context.collections.person.functions.hello({
+    name: 'Terry',
+  })
 }, {
   roles: [
     'root',
@@ -16,7 +16,7 @@ router.GET('/hello-world', () => {
 })
 
 router.GET('/get-people', async (context) => {
-  const person = await context.collections.person.functions.insert({
+  const { error, result: person } = await context.collections.person.functions.insert({
     what: {
       name: context.request.payload.name,
       job: 'programmer',
@@ -24,16 +24,12 @@ router.GET('/get-people', async (context) => {
     },
   })
 
-  if( isError(person) ) {
-    const error = unwrapError(person)
+  if( error ) {
     ACError.InsecureOperator satisfies typeof error.code
     // @ts-expect-error
     'invalid' satisfies typeof error.code
-    return person
+    return Result.error(error)
   }
-
-  person.name
-  person.job
 
   for( const pet of person.pets ) {
     pet.name
@@ -43,7 +39,7 @@ router.GET('/get-people', async (context) => {
     pet.toys.favorite.invalid
   }
 
-  return context.collections.person.functions.getAll()
+  return Result.result(context.collections.person.functions.getAll())
 }, {
   payload: {
     type: 'object',
@@ -55,18 +51,16 @@ router.GET('/get-people', async (context) => {
   },
   response: [
     insertErrorSchema(),
-    {
+    resultSchema({
       type: 'array',
       items: {
         $ref: 'person',
       },
-    },
+    }),
   ],
 })
 
 export default init({
-  callback: (context) => {
-    return router.install(context)
-  },
+  router,
 })
 

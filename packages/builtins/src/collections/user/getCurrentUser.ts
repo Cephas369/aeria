@@ -1,6 +1,6 @@
-import type { Context, SchemaWithId } from '@aeriajs/types'
+import type { Context } from '@aeriajs/types'
 import type { description } from './description.js'
-import { isError } from '@aeriajs/common'
+import { Result } from '@aeriajs/common'
 
 export enum ActivationError {
   UserNotFound = 'USER_NOT_FOUND',
@@ -16,17 +16,16 @@ export const getCurrentUser = async (
     throw new Error()
   }
 
-  const user = await context.collections.user.functions.get({
+  const { error, result: user } = await context.collections.user.functions.get({
     filters: {
       _id: context.token.sub,
     },
   })
 
-  if( isError(user) ) {
+  if( error ) {
     throw new Error()
   }
 
-  const nonNullableUser: SchemaWithId<typeof description> = user
-  return nonNullableUser
+  return Result.result(user)
 }
 

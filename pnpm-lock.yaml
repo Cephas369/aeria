@@ -343,11 +343,7 @@ importers:
         specifier: link:../types
         version: link:../types
 
-  playground:
-    dependencies:
-      playground:
-        specifier: 'link:'
-        version: 'link:'
+  playground: {}
 
 packages:
 

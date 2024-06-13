@@ -1,5 +1,34 @@
 # @aeriajs/common
 
+## 0.0.63
+
+### Patch Changes
+
+- afbd76e: Make `deserialize()` generic
+
+## 0.0.62
+
+### Patch Changes
+
+- Updated dependencies [ebe7477]
+  - @aeriajs/types@0.0.58
+
+## 0.0.61
+
+### Patch Changes
+
+- 6c981e6: Rename `leftSchema()` -> `errorSchema()`, `rightSchema()` -> `resultSchema()`
+- Updated dependencies [ec235f7]
+  - @aeriajs/types@0.0.57
+
+## 0.0.60
+
+### Patch Changes
+
+- fafac8a: Introduce `Result`
+- Updated dependencies [fafac8a]
+  - @aeriajs/types@0.0.56
+
 ## 0.0.59
 
 ### Patch Changes

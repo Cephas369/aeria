@@ -1,5 +1,95 @@
 # @aeriajs/server
 
+## 0.0.104
+
+### Patch Changes
+
+- Updated dependencies [afbd76e]
+  - @aeriajs/common@0.0.63
+  - @aeriajs/builtins@0.0.102
+  - @aeriajs/core@0.0.102
+  - @aeriajs/entrypoint@0.0.65
+  - @aeriajs/http@0.0.73
+  - @aeriajs/server@0.0.104
+  - @aeriajs/node-http@0.0.73
+
+## 0.0.103
+
+### Patch Changes
+
+- Updated dependencies [535b932]
+  - @aeriajs/builtins@0.0.101
+  - @aeriajs/core@0.0.101
+  - @aeriajs/server@0.0.103
+
+## 0.0.102
+
+### Patch Changes
+
+- 5e6751d: Change `describe()` signature
+- Updated dependencies [5e6751d]
+  - @aeriajs/builtins@0.0.100
+  - @aeriajs/server@0.0.102
+  - @aeriajs/core@0.0.100
+
+## 0.0.101
+
+### Patch Changes
+
+- 4c7243e: Add `router` in `InitOptions`, install it automatically
+- Updated dependencies [4c7243e]
+  - @aeriajs/entrypoint@0.0.64
+  - @aeriajs/server@0.0.101
+  - @aeriajs/builtins@0.0.99
+  - @aeriajs/core@0.0.99
+  - @aeriajs/http@0.0.72
+  - @aeriajs/node-http@0.0.72
+
+## 0.0.100
+
+### Patch Changes
+
+- Updated dependencies [ebe7477]
+  - @aeriajs/types@0.0.58
+  - @aeriajs/builtins@0.0.98
+  - @aeriajs/common@0.0.62
+  - @aeriajs/core@0.0.98
+  - @aeriajs/entrypoint@0.0.63
+  - @aeriajs/http@0.0.71
+  - @aeriajs/server@0.0.100
+  - @aeriajs/node-http@0.0.71
+
+## 0.0.99
+
+### Patch Changes
+
+- ec235f7: Fix pagination and function signatures
+- Updated dependencies [6c981e6]
+- Updated dependencies [ec235f7]
+  - @aeriajs/common@0.0.61
+  - @aeriajs/server@0.0.99
+  - @aeriajs/types@0.0.57
+  - @aeriajs/builtins@0.0.97
+  - @aeriajs/core@0.0.97
+  - @aeriajs/entrypoint@0.0.62
+  - @aeriajs/http@0.0.70
+  - @aeriajs/node-http@0.0.70
+
+## 0.0.98
+
+### Patch Changes
+
+- fafac8a: Introduce `Result`
+- Updated dependencies [fafac8a]
+  - @aeriajs/node-http@0.0.69
+  - @aeriajs/builtins@0.0.96
+  - @aeriajs/common@0.0.60
+  - @aeriajs/server@0.0.98
+  - @aeriajs/types@0.0.56
+  - @aeriajs/core@0.0.96
+  - @aeriajs/http@0.0.69
+  - @aeriajs/entrypoint@0.0.61
+
 ## 0.0.97
 
 ### Patch Changes

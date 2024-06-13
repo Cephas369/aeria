@@ -1,5 +1,72 @@
 # @aeriajs/builtins
 
+## 0.0.102
+
+### Patch Changes
+
+- Updated dependencies [afbd76e]
+  - @aeriajs/common@0.0.63
+  - @aeriajs/core@0.0.102
+  - @aeriajs/entrypoint@0.0.65
+  - @aeriajs/validation@0.0.66
+
+## 0.0.101
+
+### Patch Changes
+
+- 535b932: Return `Result` from builtin functions
+  - @aeriajs/core@0.0.101
+
+## 0.0.100
+
+### Patch Changes
+
+- 5e6751d: Change `describe()` signature
+  - @aeriajs/core@0.0.100
+
+## 0.0.99
+
+### Patch Changes
+
+- Updated dependencies [4c7243e]
+  - @aeriajs/entrypoint@0.0.64
+  - @aeriajs/core@0.0.99
+
+## 0.0.98
+
+### Patch Changes
+
+- Updated dependencies [ebe7477]
+  - @aeriajs/types@0.0.58
+  - @aeriajs/common@0.0.62
+  - @aeriajs/core@0.0.98
+  - @aeriajs/entrypoint@0.0.63
+  - @aeriajs/validation@0.0.65
+
+## 0.0.97
+
+### Patch Changes
+
+- Updated dependencies [6c981e6]
+- Updated dependencies [ec235f7]
+  - @aeriajs/common@0.0.61
+  - @aeriajs/types@0.0.57
+  - @aeriajs/core@0.0.97
+  - @aeriajs/entrypoint@0.0.62
+  - @aeriajs/validation@0.0.64
+
+## 0.0.96
+
+### Patch Changes
+
+- fafac8a: Introduce `Result`
+- Updated dependencies [fafac8a]
+  - @aeriajs/validation@0.0.63
+  - @aeriajs/common@0.0.60
+  - @aeriajs/types@0.0.56
+  - @aeriajs/core@0.0.96
+  - @aeriajs/entrypoint@0.0.61
+
 ## 0.0.95
 
 ### Patch Changes

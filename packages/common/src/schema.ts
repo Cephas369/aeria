@@ -57,99 +57,83 @@ export const fromLiteral = <
   } as ObjectToSchema<TObject, TRequired>
 }
 
-export const leftSchema = <const TObject extends Property>(object: TObject) => {
+export const errorSchema = <const TObject extends Property>(object: TObject) => {
   return <const>{
     type: 'object',
     properties: {
       _tag: {
-        const: 'Left',
+        const: 'Error',
       },
-      value: object,
+      error: object,
     },
   } satisfies Property
 }
 
-export const rightSchema = <const TObject extends Property>(object: TObject) => {
+export const resultSchema = <const TObject extends Property>(object: TObject) => {
   return <const>{
     type: 'object',
     properties: {
       _tag: {
-        const: 'Right',
+        const: 'Result',
       },
-      value: object,
+      result: object,
     },
   } satisfies Property
 }
 
-export const errorSchema = <
+export const endpointErrorSchema = <
   const THTTPStatus extends HTTPStatus[],
   const TCode extends string[],
 >(error: {
   httpStatus: THTTPStatus,
   code: TCode
 }) => {
-  return <const>{
+  return errorSchema({
     type: 'object',
+    required: [
+      'httpStatus',
+      'code',
+    ],
     properties: {
-      _tag: {
-        const: 'Error',
+      httpStatus: {
+        enum: error.httpStatus,
       },
-      value: {
+      code: {
+        enum: error.code,
+      },
+      message: {
+        type: 'string',
+      },
+      details: {
         type: 'object',
-        required: [
-          'httpStatus',
-          'code',
-        ],
-        properties: {
-          httpStatus: {
-            enum: error.httpStatus,
-          },
-          code: {
-            enum: error.code,
-          },
-          message: {
-            type: 'string',
-          },
-          details: {
-            type: 'object',
-            variable: true,
-          },
-        },
+        variable: true,
       },
     },
-  } satisfies Property
+  })
 }
 
-export const genericErrorSchema = () => {
-  return <const>{
+export const genericEndpointErrorSchema = () => {
+  return errorSchema({
     type: 'object',
+    required: [
+      'httpStatus',
+      'code',
+    ],
     properties: {
-      _tag: {
-        const: 'Error',
+      httpStatus: {
+        type: 'number',
       },
-      value: {
+      code: {
+        type: 'string',
+      },
+      message: {
+        type: 'string',
+      },
+      details: {
         type: 'object',
-        required: [
-          'httpStatus',
-          'code',
-        ],
-        properties: {
-          httpStatus: {
-            type: 'number',
-          },
-          code: {
-            type: 'string',
-          },
-          message: {
-            type: 'string',
-          },
-          details: {
-            type: 'object',
-            variable: true,
-          },
-        },
+        variable: true,
       },
     },
-  } satisfies Property
+  })
 }
 

@@ -1,5 +1,60 @@
 # @aeriajs/security
 
+## 0.0.102
+
+### Patch Changes
+
+- Updated dependencies [afbd76e]
+  - @aeriajs/common@0.0.63
+  - @aeriajs/core@0.0.102
+
+## 0.0.101
+
+### Patch Changes
+
+- @aeriajs/core@0.0.101
+
+## 0.0.100
+
+### Patch Changes
+
+- @aeriajs/core@0.0.100
+
+## 0.0.99
+
+### Patch Changes
+
+- @aeriajs/core@0.0.99
+
+## 0.0.98
+
+### Patch Changes
+
+- Updated dependencies [ebe7477]
+  - @aeriajs/types@0.0.58
+  - @aeriajs/common@0.0.62
+  - @aeriajs/core@0.0.98
+
+## 0.0.97
+
+### Patch Changes
+
+- Updated dependencies [6c981e6]
+- Updated dependencies [ec235f7]
+  - @aeriajs/common@0.0.61
+  - @aeriajs/types@0.0.57
+  - @aeriajs/core@0.0.97
+
+## 0.0.96
+
+### Patch Changes
+
+- fafac8a: Introduce `Result`
+- Updated dependencies [fafac8a]
+  - @aeriajs/common@0.0.60
+  - @aeriajs/types@0.0.56
+  - @aeriajs/core@0.0.96
+
 ## 0.0.95
 
 ### Patch Changes
