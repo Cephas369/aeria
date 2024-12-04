@@ -12,7 +12,7 @@ export declare const extendAnimalCollection: <
             }
           }>(collection: Pick<TCollection, keyof Collection>) => ExtendCollection<typeof animal, TCollection>
 
-export declare type petCollection = {description:{$id:"pet",properties:{},owned:undefined}}
+export declare type petCollection = {description:{$id:"pet",properties:{},owned:false}}
 export declare const pet: petCollection & { item: SchemaWithId<petCollection["description"]> }
 export declare type Pet = SchemaWithId<typeof pet.description>
 export declare const extendPetCollection: <
