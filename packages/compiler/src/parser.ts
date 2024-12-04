@@ -1,4 +1,4 @@
-import type { Property, AccessCondition } from '@aeriajs/types'
+import type { Property } from '@aeriajs/types'
 import { TokenType, type Token } from './lexer'
 import * as AST from './ast'
 import * as guards from './guards'
@@ -291,7 +291,7 @@ export const parse = (tokens: Token[]) => {
   const consumeFunctionsBlock = (ast: AST.Node[]) => {
     consume(TokenType.LeftBracket)
 
-    const functions: Record<string, AccessCondition> = {}
+    const functions: AST.CollectionNode['functions'] = {}
     while( !match(TokenType.RightBracket) ) {
       if( match(TokenType.AttributeName, 'include') ) {
         consume(TokenType.AttributeName)
@@ -308,18 +308,28 @@ export const parse = (tokens: Token[]) => {
           throw new Error(`functionset "${functionSetName} not found"`)
         }
 
-        Object.assign(functions, functionset.functions)
+        for (const key in functionset.functions) {
+          functions[key] = {
+            accessCondition: functionset.functions[key].accessCondition,
+            fromFunctionSet: true,
+          }
+        }
+
         consume(TokenType.RightParens)
 
         continue
       }
 
       const { value: functionName } = consume(TokenType.Identifier)
-      functions[functionName] = false
+      functions[functionName] = {
+        accessCondition: false,
+      }
 
       while( match(TokenType.AttributeName, 'expose') ) {
         consume(TokenType.AttributeName, 'expose')
-        functions[functionName] = true
+        functions[functionName] = {
+          accessCondition: true,
+        }
       }
     }
 

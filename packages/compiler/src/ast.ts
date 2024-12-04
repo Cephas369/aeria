@@ -37,7 +37,10 @@ export type CollectionNode = {
   extends?: ExportSymbol
   owned?: boolean
   properties: Record<string, PropertyNode>
-  functions?: Record<string, AccessCondition>
+  functions?: Record<string, {
+    accessCondition: AccessCondition,
+    fromFunctionSet?: true
+  }>
 }
 
 export type ContractNode = {
@@ -58,7 +61,10 @@ export type ContractNode = {
 export type FunctionSetNode = {
   type: 'functionset'
   name: string
-  functions: Record<string, AccessCondition>
+  functions: Record<string, {
+    accessCondition: AccessCondition,
+    fromFunctionSet?: true
+  }>
 }
 
 export type Node =
