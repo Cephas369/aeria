@@ -64,7 +64,7 @@ const makeTSCollections = (ast: AST.Node[]) => {
       description: {
         $id: id,
         properties: getCollectionProperties(collectionNode.properties),
-        owned: collectionNode.owned,
+        owned: collectionNode.owned ?? false,
       },
       ...(collectionNode.functions && {
         functions: Object.keys(collectionNode.functions).reduce<Record<string, any>>((acc, key) => (acc[key] = `typeof ${key}`, acc), {}),
