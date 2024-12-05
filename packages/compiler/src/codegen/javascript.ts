@@ -27,18 +27,7 @@ const makeJSCollections = (ast: AST.Node[], modifiedSymbols: Record<string, stri
       const collectionDefinition =
             `export const ${id} = ${collectionNode.extends
               ? 'extendCollection'
-              : 'defineCollection'}(${stringify({
-              description: {
-                $id: id,
-                properties: getCollectionProperties(collectionNode.properties),
-                ...(collectionNode.owned === true && {
-                  owned: collectionNode.owned,
-                }),
-              },
-              ...(collectionNode.functions && {
-                functions: `{${makeJSFunctions(collectionNode.functions)}}`,
-              }),
-            })})`
+              : 'defineCollection'}(${makeJSCollectionSchema(collectionNode, id)})`
 
       const collectionDeclaration =
       `export const ${extendCollectionName} = (collection) => extendCollection(${id in modifiedSymbols
@@ -46,11 +35,25 @@ const makeJSCollections = (ast: AST.Node[], modifiedSymbols: Record<string, stri
         : id}, collection)`
 
       return [
+        "//" + collectionNode.name,
         collectionDefinition,
         collectionDeclaration,
       ].join('\n')
     }).join('\n\n')
 }
+
+const makeJSCollectionSchema = (collectionNode: AST.CollectionNode, collectionId: string) => stringify({
+  description: {
+    $id: collectionId,
+    properties: getCollectionProperties(collectionNode.properties),
+    ...(collectionNode.owned === true && {
+      owned: collectionNode.owned,
+    }),
+  },
+  ...(collectionNode.functions && {
+    functions: `{${makeJSFunctions(collectionNode.functions)}}`,
+  }),
+})
 
 const makeJSFunctions = (functions: NonNullable<AST.CollectionNode['functions']>) => {
   return Object.keys(functions).join(', ')

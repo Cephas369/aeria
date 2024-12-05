@@ -52,24 +52,22 @@ export const getCollectionProperties = (properties: AST.CollectionNode['properti
 }
 
 /** Assure if specific fields needs to be between quotes or not */
-export const stringify = (node: Record<string, any>, parents?: string[]) => {
+export const stringify = (node: Record<string, any>, parents: string[] = []) => {
   if (typeof node !== 'object' || Array.isArray(node)) {
     return JSON.stringify(node)
   }
 
   const objectString: string = Object.keys(node).map((key) => {
-    if (!parents) {
-      parents = [key]
-    } else {
-      parents.push(key)
-    }
+      const currentParents = [...parents, key];
 
-    return !betweenQuotes(parents, String(node[key]))
-      ? `${key}:${stringify(node[key], parents).replaceAll('"', '')}`
-      : `${key}:${stringify(node[key], parents)}`
-  }).join(',')
+      const prefix = "\t".repeat(currentParents.length);
 
-  return `{${objectString}}`
+    return !betweenQuotes(currentParents, String(node[key]))
+      ? `${prefix}${key}: ${stringify(node[key], currentParents).replaceAll('"', '')}`
+      : `${prefix}${key}: ${stringify(node[key], currentParents)}`
+  }).join(',\n')
+
+  return `{\n${objectString}\n${"\t".repeat(parents.length)}}`
 }
 
 const booleanValues = [

@@ -27,22 +27,23 @@ const makeTSCollections = (ast: AST.Node[], modifiedSymbols: Record<string, stri
 
       const collectionType = `export declare type ${typeName} = ${
         id in modifiedSymbols ?
-          `ExtendCollection<typeof ${modifiedSymbols[id]}, ${makeTSCollectionType(collectionNode, id)}>`
-          : makeTSCollectionType(collectionNode, id)
+          `ExtendCollection<typeof ${modifiedSymbols[id]}, ${makeTSCollectionSchema(collectionNode, id)}>`
+          : makeTSCollectionSchema(collectionNode, id)
       }`
 
       const collectionDeclaration = `export declare const ${id}: ${typeName} & { item: SchemaWithId<${typeName}["description"]> }`
       const collectionSchema = `export declare type ${schemaName} = SchemaWithId<typeof ${id}.description>`
       const collectionExtend = `export declare const extend${schemaName}Collection: <
             const TCollection extends {
-              [P in Exclude<keyof Collection, "functions">] ? : Partial <Collection[P]>
-            } &{
+              [P in Exclude<keyof Collection, "functions">]?: Partial<Collection[P]>
+            } & {
               functions?: {
                 [F: string]: (payload: any, context: Context<typeof ${id}["description"]>) => unknown
               }
             }>(collection: Pick<TCollection, keyof Collection>) => ExtendCollection<typeof ${id}, TCollection>`
 
       return [
+        "//" + collectionNode.name,
         collectionType,
         collectionDeclaration,
         collectionSchema,
@@ -51,7 +52,7 @@ const makeTSCollections = (ast: AST.Node[], modifiedSymbols: Record<string, stri
     }).join('\n\n')
 }
 
-const makeTSCollectionType = (collectionNode: AST.CollectionNode, collectionId: string) => stringify({
+const makeTSCollectionSchema = (collectionNode: AST.CollectionNode, collectionId: string) => stringify({
   description: {
     $id: collectionId,
     properties: getCollectionProperties(collectionNode.properties),
