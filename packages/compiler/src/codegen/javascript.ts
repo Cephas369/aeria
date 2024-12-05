@@ -35,7 +35,7 @@ const makeJSCollections = (ast: AST.Node[], modifiedSymbols: Record<string, stri
         : id}, collection)`
 
       return [
-        "//" + collectionNode.name,
+        '//' + collectionNode.name,
         collectionDefinition,
         collectionDeclaration,
       ].join('\n')

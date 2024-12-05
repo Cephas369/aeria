@@ -58,16 +58,19 @@ export const stringify = (node: Record<string, any>, parents: string[] = []) => 
   }
 
   const objectString: string = Object.keys(node).map((key) => {
-      const currentParents = [...parents, key];
+    const currentParents = [
+      ...parents,
+      key,
+    ]
 
-      const prefix = "\t".repeat(currentParents.length);
+    const prefix = '\t'.repeat(currentParents.length)
 
     return !betweenQuotes(currentParents, String(node[key]))
       ? `${prefix}${key}: ${stringify(node[key], currentParents).replaceAll('"', '')}`
       : `${prefix}${key}: ${stringify(node[key], currentParents)}`
   }).join(',\n')
 
-  return `{\n${objectString}\n${"\t".repeat(parents.length)}}`
+  return `{\n${objectString}\n${'\t'.repeat(parents.length)}}`
 }
 
 const booleanValues = [

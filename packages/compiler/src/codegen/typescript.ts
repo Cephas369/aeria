@@ -43,7 +43,7 @@ const makeTSCollections = (ast: AST.Node[], modifiedSymbols: Record<string, stri
             }>(collection: Pick<TCollection, keyof Collection>) => ExtendCollection<typeof ${id}, TCollection>`
 
       return [
-        "//" + collectionNode.name,
+        '//' + collectionNode.name,
         collectionType,
         collectionDeclaration,
         collectionSchema,
