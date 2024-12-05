@@ -2,7 +2,7 @@ import type * as AST from '../ast'
 
 export const aeriaPackageName = 'aeria'
 
-/** If it's for a js file it will initially aggregate the used functions to the reduce  
+/** If it's for a js file it will initially aggregate the used functions to the reduce
  * It will save and return any modified symbols to avoid name duplication later
 */
 export const makeASTImports = (ast: AST.Node[], initialImports?: Record<string, Set<string>>) => {

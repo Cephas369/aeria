@@ -9,7 +9,9 @@ const initialImportedFunctions = [
 
 export const generateJavascript = (ast: AST.Node[]) => {
   let javascriptCode = ''
-  const importsResult = makeASTImports(ast, { [aeriaPackageName]: new Set(initialImportedFunctions) })
+  const importsResult = makeASTImports(ast, {
+    [aeriaPackageName]: new Set(initialImportedFunctions),
+  })
   javascriptCode += importsResult.code + '\n\n'
   javascriptCode += makeJSCollections(ast, importsResult.modifiedSymbols) + '\n\n'
 
@@ -38,8 +40,10 @@ const makeJSCollections = (ast: AST.Node[], modifiedSymbols: Record<string, stri
               }),
             })})`
 
-      const collectionDeclaration = 
-      `export const ${extendCollectionName} = (collection) => extendCollection(${id in modifiedSymbols ? modifiedSymbols[id] : id}, collection)`
+      const collectionDeclaration =
+      `export const ${extendCollectionName} = (collection) => extendCollection(${id in modifiedSymbols
+        ? modifiedSymbols[id]
+        : id}, collection)`
 
       return [
         collectionDefinition,

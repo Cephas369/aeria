@@ -1,7 +1,12 @@
 import type * as AST from '../ast'
 import { getCollectionProperties, stringify, makeASTImports, resizeFirstChar, aeriaPackageName } from './utils'
 
-const initialImportedTypes = ['Collection', 'SchemaWithId', 'ExtendCollection', 'Context']
+const initialImportedTypes = [
+  'Collection',
+  'SchemaWithId',
+  'ExtendCollection',
+  'Context',
+]
 
 export const generateTypescript = (ast: AST.Node[]): string => {
   let code = ''
@@ -20,11 +25,10 @@ const makeTSCollections = (ast: AST.Node[], modifiedSymbols: Record<string, stri
       const schemaName = resizeFirstChar(collectionNode.name, true) //collectionName -> CollectionName
       const typeName = id + 'Collection' //Pet -> petCollection
 
-
       const collectionType = `export declare type ${typeName} = ${
-        id in modifiedSymbols ? 
-        `ExtendCollection<typeof ${modifiedSymbols[id]}, ${makeTSCollectionType(collectionNode, id)}>`
-        : makeTSCollectionType(collectionNode, id)
+        id in modifiedSymbols ?
+          `ExtendCollection<typeof ${modifiedSymbols[id]}, ${makeTSCollectionType(collectionNode, id)}>`
+          : makeTSCollectionType(collectionNode, id)
       }`
 
       const collectionDeclaration = `export declare const ${id}: ${typeName} & { item: SchemaWithId<${typeName}["description"]> }`
@@ -51,13 +55,14 @@ const makeTSCollectionType = (collectionNode: AST.CollectionNode, collectionId: 
   description: {
     $id: collectionId,
     properties: getCollectionProperties(collectionNode.properties),
-    ...(collectionNode.owned && { owned: collectionNode.owned ?? false }),
+    ...(collectionNode.owned && {
+      owned: collectionNode.owned ?? false,
+    }),
   },
   ...(collectionNode.functions && {
     functions: makeTSFunctions(collectionNode.functions),
   }),
 })
-
 
 /** Turns each function to 'typeof functioName' if it's from aeria or  */
 const makeTSFunctions = (functions: NonNullable<AST.CollectionNode['functions']>) => {
