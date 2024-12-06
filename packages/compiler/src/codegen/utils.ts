@@ -1,29 +1,37 @@
 import type * as AST from '../ast'
+import { functions as aeriaFunctions } from 'aeria'
 
 export const aeriaPackageName = 'aeria'
 
-/** If it's for a js file it will initially aggregate the used functions to the reduce
- * It will save and return any modified symbols to avoid name duplication later
+/**
+ * Obs: It will save and return any modified symbols to avoid name duplication later
 */
 export const makeASTImports = (ast: AST.Node[], initialImports?: Record<string, Set<string>>) => {
   const modifiedSymbols: Record<string, string> = {}
 
   const toImport = ast.reduce((imports, node) => {
-    if (node.type === 'collection' && node.extends?.packageName) {
-      if (!(node.extends.packageName in imports)) {
-        imports[node.extends.packageName] = new Set()
-      }
-      const modifiedSymbol = `original${resizeFirstChar(node.extends.symbolName, true)}`
-      modifiedSymbols[node.extends.symbolName] = modifiedSymbol
-      imports[node.extends.packageName].add(`${node.extends.symbolName} as ${modifiedSymbol}`)
+    if (node.type === 'collection') {
+      if (node.extends?.packageName) {
+        if (!(node.extends.packageName in imports)) {
+          imports[node.extends.packageName] = new Set()
+        }
 
-    } else if (node.type === 'functionset' && Object.keys(node.functions).length > 0) {
-      if (!(aeriaPackageName in imports)) {
-        imports[aeriaPackageName] = new Set()
+        const modifiedSymbol = `original${resizeFirstChar(node.extends.symbolName, true)}`
+        modifiedSymbols[node.extends.symbolName] = modifiedSymbol
+        imports[node.extends.packageName].add(`${node.extends.symbolName} as ${modifiedSymbol}`)
       }
 
-      for (const key in node.functions) {
-        imports[aeriaPackageName].add(key)
+      if (node.functions) {
+        const functionsToImport = Object.keys(node.functions).filter((key) => Object.keys(aeriaFunctions).includes(key))
+        if (functionsToImport.length > 0) {
+          if (!(aeriaPackageName in imports)) {
+            imports[aeriaPackageName] = new Set()
+          }
+
+          for (const key of functionsToImport) {
+            imports[aeriaPackageName].add(key)
+          }
+        }
       }
     }
 
@@ -90,6 +98,9 @@ const nonStringAttributes = [
 const betweenQuotes = (parents: string[], value: string) =>
   !value.includes('typeof') && !booleanValues.includes(value) && !parents.some((parent) => nonStringAttributes.includes(parent))
 
+/** Used to make the id and the schema name of the collection */
 export const resizeFirstChar = (name: string, capitalize: boolean): string => name.charAt(0)[capitalize
   ? 'toUpperCase'
   : 'toLowerCase']() + name.slice(1)
+
+export const getExtendName = (name: string) => `extend${resizeFirstChar(name, true)}Collection`
